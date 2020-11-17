@@ -67,7 +67,7 @@ In order to run the script, either download the ZIP version of this repository a
 
     git clone https://github.com/AaronWinziers/DataErrorFinder.git
     
-Before executing, the location of the files that need to be checked should be amended in line 4 of the script.
+Before executing, the location of the files that need to be checked should be amended in line 28 of the script.
     
 Navigate into the folder containing the code, and execute the following in order to install the required packages:
 
