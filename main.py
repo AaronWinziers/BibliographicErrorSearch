@@ -1,24 +1,24 @@
-import xml.etree.ElementTree as et
+import xml.etree.ElementTree as ET
 import re
 
 TAGS = [
 	'entry',
 	'ti',
 	'au',
-	'a',
-	'trd',
-	'ed',
 	'det',
+	'bib',
+	'ex',
+	'res',
+	'tr',
+	'ae',
 	'pl',
 	'pb',
 	'y',
 	'f',
 	'p',
-	'bib',
-	'ex',
-	'tr',
-	'res',
-	'ae',
+	'a',
+	'trd',
+	'ed',
 ]
 
 STEPS = ['entry', 'det', 'res', 'au', 'ae', 'ae_se']
@@ -71,15 +71,16 @@ def check_tagged_files():
 	doubled = list()
 
 	for year_number in year_range:
-		print("Counting year " + str(year_number))
 		if year_number == 60 or year_number == 70 or year_number == 80 or year_number == 90:
 			continue
+		print("\nCounting year " + str(year_number))
 		for step in STEPS:
+			print(step + " ", end="")
 			# Read the xml file from each step in the process into tree
 			if year_number == 100:
-				tree = et.parse(path_to_dir + step + '/00_tagged.xml')
+				tree = ET.parse(path_to_dir + step + '/00_tagged.xml')
 			else:
-				tree = et.parse(path_to_dir + step + '/' + str(year_number) + '_tagged.xml')
+				tree = ET.parse(path_to_dir + step + '/' + str(year_number) + '_tagged.xml')
 
 			root = tree.getroot()
 
@@ -101,6 +102,7 @@ def check_tagged_files():
 						tag_count = len(document.findall('.//' + tag))
 						doc_map[doc_id][step][tag] = tag_count
 
+	print()
 	pretty_print(doc_map)
 	print("Incorrectly formatted IDs: " + str(oopsies))
 	print("Doubled IDs: " + str(doubled))
